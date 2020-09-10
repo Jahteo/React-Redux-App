@@ -12,9 +12,9 @@ function App({ fetchManga, loadingManga, errorMessage }) {
 
   return (
     <div className="App">
-      <header className="App-header">
         <h1>Manga Searcher</h1>
         <h2>Err, a work in progress. Enjoy the Top Ranked Manga from AnimeList in the meantime!</h2>
+      <header className="App-header">
         {!loadingManga ? <MangaList /> : <div>...Scavenging Current Manga Deets...</div>}
         {errorMessage !== "" ? <div>{errorMessage}</div> : null}
         {/* TODO:create a spinny bit in a corner, and other bobs reusing the code below */}

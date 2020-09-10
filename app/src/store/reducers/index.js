@@ -5,6 +5,7 @@ import {
   FETCH_TOPMANGA_SUCCESS,
 } from "../actions/mangaListActions";
 
+//Clear out initial data at production. Here for now bc such diff structures, and the search/genre results may also be very different. Pay attention!
 const initialState = {
   mangas: [
     // {
