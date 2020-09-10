@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from "react-redux"
 import logo from './logo.svg';
 import './App.css';
 import MangaList from "./components/MangaList"
+import { fetchManga } from "./store/actions/mangaListActions"
 
-function App() {
+function App({ fetchManga, loadingManga, errorMessage }) {
+  useEffect(() => {
+    fetchManga();
+  }, [fetchManga]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Manga Searcherer</h1>
-        <MangaList />
+        <h1>Manga Searcher</h1>
+        <h2>Err, a work in progress. Enjoy the Top Ranked Manga from AnimeList in the meantime!</h2>
+        {!loadingManga ? <MangaList /> : <div>...Scavenging Current Manga Deets...</div>}
+        {errorMessage !== "" ? <div>{errorMessage}</div> : null}
+        {/* TODO:create a spinny bit in a corner, and other bobs reusing the code below */}
         {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -26,4 +35,11 @@ function App() {
   );
 }
 
-export default App;
+function mapPropsToState (state) {
+  return {
+    loadingManga: state.loadingManga,
+    errorMessage: state.errorMessage
+  }
+}
+
+export default connect(mapPropsToState, { fetchManga })(App);
